@@ -3,13 +3,152 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
     <title>Youtube Super Search</title>
   </head>
 
   <body>
+    <h1>Youtube Super Search</h1>
     <form action="/" method="POST">
-      <input type="text" name="query" />
-      <input type="submit" value="Search" />
+      <input type="text" name="q" />
+
+      <button type="submit">Search</button>
+
+      <button
+        type="button"
+        onclick='alert(`Your request can also use the Boolean NOT (-) and OR (|) operators to exclude videos or to find videos that are associated with one of several search terms. For example, to search for videos matching either "boating" or "sailing", use boating|sailing. Similarly, to search for videos matching either "boating" or "sailing" but not "fishing", use boating|sailing -fishing.`)'
+      >
+        &#9432;
+      </button>
+
+      <hr />
+
+      <label>Channel Id</label>
+      <input type="text" name="channelId" />
+
+      <!-- dropdown -->
+      <label>Channel Type</label>
+      <select name="channelType">
+        <option selected value="any">any</option>
+        <option value="show">show</option>
+      </select>
+
+      <!-- Set type to video if selected -->
+      <label>Event Type</label>
+      <select name="eventType">
+        <option selected value="any">any</option>
+        <option value="high">high</option>
+        <option value="live">live</option>
+        <option value="completed">completed</option>
+      </select>
+
+      <!-- Set type to video if selected -->
+      <!-- These two much be togehter -->
+      <label>Location</label>
+      <input type="text" name="location" placeholder="37.42307,-122.08427" />
+      <label>Location Radius</label>
+      <input
+        type="text"
+        name="locationRadius"
+        placeholder="eg 1500m, 5km, 10000ft, or 0.75mi"
+      />
+
+      <label>Max Results (1-25)</label>
+      <input type="number" min="1" max="25" name="maxResults" />
+
+      <label>Sort Order</label>
+      <select name="order">
+        <option selected value="relevance">relevance</option>
+        <option value="date">date</option>
+        <option value="rating">rating</option>
+        <option value="viewCount">viewCount</option>
+        <option value="title">title</option>
+        <option value="videoCount">videoCount</option>
+      </select>
+
+      <label>Published After</label>
+      <input
+        type="text"
+        name="publishedAfter"
+        placeholder="1970-01-01T00:00:00Z"
+      />
+
+      <label>Published Before</label>
+      <input
+        type="text"
+        name="publishedBefore"
+        placeholder="1970-01-01T00:00:00Z"
+      />
+
+      <label>Region Code</label>
+      <button
+        type="button"
+        onclick="alert(`The regionCode parameter instructs the API to return search results for videos that can be viewed in the specified country. The parameter value is an ISO 3166-1 alpha-2 country code. https://www.iso.org/obp/ui/#search`)"
+      >
+        &#9432;
+      </button>
+      <input type="text" name="regionCode" placeholder="IN" />
+
+      <label>Relevance Language</label>
+      <button
+        type="button"
+        onclick="alert(`The relevanceLanguage parameter instructs the API to return search results that are most relevant to the specified language. The parameter value is typically an ISO 639-1 two-letter language code. https://www.loc.gov/standards/iso639-2/php/code_list.php`)"
+      >
+        &#9432;
+      </button>
+      <input type="text" name="relevanceLanguage" />
+
+      <label>Safe Search</label>
+      <select name="safeSearch">
+        <option value="none">none</option>
+        <option selected value="moderate">moderate</option>
+        <option value="strict">strict</option>
+      </select>
+
+      <label>Result Type</label>
+      <input type="checkbox" name="type" value="video" checked />
+      <label for="video">video</label>
+      <input type="checkbox" name="type" value="channel" checked />
+      <label for="channel">channel</label>
+      <input type="checkbox" name="type" value="playlist" checked />
+      <label for="playlist">playlist</label>
+
+      <label>Video Definition</label>
+      <select name="videoDefinition">
+        <option selected value="any">any</option>
+        <option value="standard">standard</option>
+        <option value="high">high</option>
+      </select>
+
+      <label>Video Dimension</label>
+      <select name="videoDimension">
+        <option selected value="any">any</option>
+        <option value="2d">2d</option>
+        <option value="3d">3d</option>
+      </select>
+
+      <label>Video Duration</label>
+      <button
+        type="button"
+        onclick="alert(`long – Only include videos longer than 20 minutes.
+medium – Only include videos that are between four and 20 minutes long (inclusive).
+short – Only include videos that are less than four minutes long.`)"
+      >
+        &#9432;
+      </button>
+      <select name="videoDuration">
+        <option selected value="any">any</option>
+        <option value="short">short</option>
+        <option value="medium">medium</option>
+        <option value="long">long</option>
+      </select>
+
+      <label>Video Type</label>
+      <select name="videoType">
+        <option selected value="any">any</option>
+        <option value="episode">episode</option>
+        <option value="movie">movie</option>
+      </select>
     </form>
   </body>
 </html>

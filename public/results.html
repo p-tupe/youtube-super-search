@@ -3,10 +3,39 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
     <title>Youtube Super Search</title>
   </head>
 
   <body>
-    Results!! {{ printf "%s" .Results }}
+    <h1>Results</h1>
+    <a href="/">Back</a>
+
+    {{range .Items}}
+    <div style="margin: 32px; border-bottom: 1px solid grey">
+      {{if .Snippet.Thumbnails.High }}
+      <img src="{{.Snippet.Thumbnails.High.Url}}" width="100%" />
+      {{else if .Snippet.Thumbnails.Medium }}
+      <img src="{{.Snippet.Thumbnails.Medium.Url}}" width="100%" />
+      {{else if .Snippet.Thumbnails.Default }}
+      <img src="{{.Snippet.Thumbnails.Default.Url}}" width="100%" />
+      {{end}}
+
+      <h3>
+        <a
+          href="https://www.youtube.com/watch?v={{.Id.VideoId}}"
+          target="_blank"
+          >{{.Snippet.Title}}</a
+        >
+      </h3>
+
+      <h4>{{.Snippet.Description}}</h4>
+    </div>
+
+    {{else}}
+
+    <h4>No results found!</h4>
+
+    {{end}}
   </body>
 </html>
