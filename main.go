@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"fmt"
 	"html/template"
 	"log"
@@ -8,16 +9,13 @@ import (
 	"time"
 )
 
-type Options struct {
-	Title string
-}
+//go:embed templates
+var templateFS embed.FS
 
-var templates = template.Must(template.ParseFiles(
-	"./public/index.html",
-	"./public/results.html",
-))
+var templates = template.Must(template.ParseFS(templateFS, "templates/*.html"))
 
 func main() {
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
 			templates.Execute(w, "index.html")
@@ -25,7 +23,6 @@ func main() {
 			items, err := queryYoutube(r.FormValue("q"))
 			if err != nil {
 				fmt.Println(err)
-				// TODO: expand on error page
 				w.WriteHeader(http.StatusBadRequest)
 				return
 			}
